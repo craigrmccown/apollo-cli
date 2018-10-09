@@ -1,11 +1,13 @@
-import { join } from "path";
+import { join, resolve } from "path";
 import {
   window,
   workspace,
   ExtensionContext,
   Uri,
   ProgressLocation,
-  DecorationOptions
+  DecorationOptions,
+  commands,
+  QuickPickItem
 } from "vscode";
 import {
   LanguageClient,
@@ -15,9 +17,34 @@ import {
 } from "vscode-languageclient";
 import StatusBar from "./StatusBar";
 
+import { findAndLoadConfig } from "apollo/lib/config";
+
+// Basically hijack the .env file so we have the values in process.env later
+require("dotenv").config({
+  ...(workspace.rootPath && { path: resolve(workspace.rootPath, ".env") })
+});
+
 export function activate(context: ExtensionContext) {
   const serverModule = context.asAbsolutePath(join("server", "server.js"));
   const debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
+  const schemaTags: QuickPickItem[] = [];
+
+  workspace.findFiles("**/apollo.config.js").then(files => {
+    if (files.length) {
+      const config = findAndLoadConfig(files[0].path, true, true);
+      const localDevUrl = (
+        ((config || {}).schemas || {}).default.endpoint || {}
+      ).url;
+
+      if (localDevUrl) {
+        schemaTags.push({
+          label: "local",
+          description: localDevUrl,
+          detail: "test"
+        });
+      }
+    }
+  });
 
   const serverOptions: ServerOptions = {
     run: { module: serverModule, transport: TransportKind.ipc },
@@ -57,6 +84,20 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(client.start());
 
   client.onReady().then(() => {
+    client.onNotification("apollographql/tagsLoaded", stringifiedTags => {
+      debugger;
+      const tags = JSON.parse(stringifiedTags);
+      schemaTags.push({ label: tags, description: "", detail: "" });
+      statusBar.setTagsPopulated(true);
+
+      commands.registerCommand("launchSchemaTagPicker", async () => {
+        const selection = await window.showQuickPick(schemaTags);
+        if (selection) {
+          client.sendNotification("apollographql/tagSelected", selection);
+        }
+      });
+    });
+
     let currentLoadingResolve: Map<number, () => void> = new Map();
 
     client.onNotification("apollographql/loadingComplete", token => {

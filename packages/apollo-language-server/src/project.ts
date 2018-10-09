@@ -89,6 +89,16 @@ const engineStatsQuery = gql`
   }
 `;
 
+const schemaTagsQuery = gql`
+  query SchemaTags($id: ID!) {
+    service(id: $id) {
+      schemaTags {
+        tag
+      }
+    }
+  }
+`;
+
 export interface DocumentAndSet {
   doc: GraphQLDocument;
   set: ResolvedDocumentSet;
@@ -98,6 +108,7 @@ export class GraphQLProject {
   public config: ApolloConfig = (null as any) as ApolloConfig;
   private _onDiagnostics?: NotificationHandler<PublishDiagnosticsParams>;
   private _onDecorations?: (any: any) => void;
+  private _onSchemaTags?: (tags: string[]) => void;
 
   public isReady = false;
   public readyPromise: Promise<void> | undefined = undefined;
@@ -113,6 +124,7 @@ export class GraphQLProject {
     string,
     Map<string, Map<string, number>>
   > = new Map();
+  private schemaTags: string[] = [];
 
   constructor(
     config: ApolloConfig,
@@ -135,6 +147,7 @@ export class GraphQLProject {
 
     this.documentSets = undefined;
     this.engineStats.clear();
+    this.schemaTags = [];
     this.documentsByFile = new Map();
     this.setToResolved.clear();
 
@@ -143,10 +156,18 @@ export class GraphQLProject {
       .catch(error => {
         console.error(error);
       });
+
+    this.loadSchemaTags().then(() => {
+      this._onSchemaTags && this._onSchemaTags(this.schemaTags);
+    });
   }
 
   get displayName(): string {
     return this.config.name || "";
+  }
+
+  onSchemaTags(handler: (tags: string[]) => void): void {
+    this._onSchemaTags = handler;
   }
 
   onDiagnostics(handler: NotificationHandler<PublishDiagnosticsParams>) {
@@ -177,6 +198,38 @@ export class GraphQLProject {
 
   private includesPath(filePath: string) {
     return !!this.setThatIncludes(filePath);
+  }
+
+  async loadSchemaTags() {
+    await this.loadingHandler.handle(
+      `Loading available schema tags for ${this.config.name!}`,
+      Promise.all(
+        Object.values(this.config.schemas!).map(async schemaDef => {
+          if (schemaDef.engineKey) {
+            const tagsResult = await toPromise(
+              execute(engineLink, {
+                query: schemaTagsQuery,
+                variables: {
+                  id: getIdFromKey(schemaDef.engineKey!)
+                },
+                context: {
+                  headers: { ["x-api-key"]: schemaDef.engineKey },
+                  ...(this.config.engineEndpoint && {
+                    uri: this.config.engineEndpoint
+                  })
+                }
+              })
+            );
+
+            const flattenedResult: string[] = tagsResult.data!.service.schemaTags.map(
+              ({ tag }: { tag: string }) => tag
+            );
+
+            this.schemaTags = [...this.schemaTags, ...flattenedResult];
+          }
+        })
+      )
+    );
   }
 
   async loadEngineStats() {
@@ -246,7 +299,11 @@ export class GraphQLProject {
       `Loading queries and schemas for ${this.config.name!}`,
       (async () => {
         console.time(`scanAllIncludedFiles - ${this.displayName}`);
-        this.documentSets = await resolveDocumentSets(this.config, true);
+        this.documentSets = await resolveDocumentSets(
+          this.config,
+          true,
+          "engine"
+        );
 
         for (const set of this.documentSets) {
           if (!set.schema!.getQueryType()!.astNode) {

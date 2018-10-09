@@ -70,6 +70,11 @@ export class LoadingHandler {
 
 const workspace = new GraphQLWorkspace(new LoadingHandler());
 
+workspace.onSchemaTags((tags: string[]) => {
+  debugger;
+  connection.sendNotification("apollographql/tagsLoaded", JSON.stringify(tags));
+});
+
 workspace.onDiagnostics(params => {
   connection.sendDiagnostics(params);
 });
@@ -204,25 +209,38 @@ connection.onDefinition((params, token) => {
   );
 });
 
-connection.onReferences((params, token) => {
-  return languageProvider.provideReferences(
+connection.onReferences((params, token) =>
+  languageProvider.provideReferences(
     params.textDocument.uri,
     params.position,
     params.context,
     token
-  );
-});
+  )
+);
 
-connection.onCompletion((params, token) => {
-  return languageProvider.provideCompletionItems(
+connection.onCompletion((params, token) =>
+  languageProvider.provideCompletionItems(
     params.textDocument.uri,
     params.position,
     token
-  );
-});
+  )
+);
 
-connection.onCodeLens((params, token) => {
-  return languageProvider.provideCodeLenses(params.textDocument.uri, token);
-});
+connection.onCodeLens((params, token) =>
+  languageProvider.provideCodeLenses(params.textDocument.uri, token)
+);
+
+type TagSelection = {
+  label: string;
+  description?: string;
+  detail?: string;
+};
+
+connection.onNotification(
+  "apollographql/tagSelected",
+  (selection: TagSelection) => {
+    console.log(selection);
+  }
+);
 
 connection.listen();

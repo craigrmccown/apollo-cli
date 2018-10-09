@@ -183,21 +183,20 @@ export function findAndLoadConfig(
   defaultEndpoint: boolean,
   defaultSchema: boolean
 ): ApolloConfig {
-  if (fs.existsSync(join(dir, "apollo.config.js"))) {
-    return loadConfigFromFile(
-      join(dir, "apollo.config.js"),
-      defaultEndpoint,
-      defaultSchema
-    );
-  } else if (fs.existsSync(join(dir, "package.json"))) {
-    return loadConfigFromFile(
-      join(dir, "package.json"),
-      defaultEndpoint,
-      defaultSchema
-    );
-  } else {
-    return loadConfig({}, dir, dir, defaultEndpoint, defaultSchema);
+  const apolloPath = dir.match(/\/apollo\.config\.js$/)
+    ? dir
+    : join(dir, "apollo.config.js");
+  if (fs.existsSync(apolloPath)) {
+    return loadConfigFromFile(apolloPath, defaultEndpoint, defaultSchema);
   }
+
+  const packagePath = dir.match(/package\.json/)
+    ? dir
+    : join(dir, "package.json");
+  if (fs.existsSync(packagePath)) {
+    return loadConfigFromFile(packagePath, defaultEndpoint, defaultSchema);
+  }
+  return loadConfig({}, dir, dir, defaultEndpoint, defaultSchema);
 }
 
 export interface ResolvedDocumentSet {
@@ -212,7 +211,8 @@ export interface ResolvedDocumentSet {
 
 export async function resolveSchema(
   name: string,
-  config: ApolloConfig
+  config: ApolloConfig,
+  sourceOverride?: string
 ): Promise<GraphQLSchema | undefined> {
   const referredSchema = (config.schemas || {})[name];
 
@@ -238,15 +238,18 @@ export async function resolveSchema(
       )
     : referredSchema.clientSide
       ? buildASTSchema(loadAsAST())
-      : await loadSchema(referredSchema, config).then(introspectionSchema => {
-          if (!introspectionSchema) return;
-          return buildClientSchema({ __schema: introspectionSchema });
-        });
+      : await loadSchema(referredSchema, config, sourceOverride).then(
+          introspectionSchema => {
+            if (!introspectionSchema) return;
+            return buildClientSchema({ __schema: introspectionSchema });
+          }
+        );
 }
 
 export async function resolveDocumentSets(
   config: ApolloConfig,
-  needSchema: boolean
+  needSchema: boolean,
+  sourceOverride?: string
 ): Promise<ResolvedDocumentSet[]> {
   return await Promise.all(
     (config.queries || []).map(async doc => {
@@ -267,7 +270,7 @@ export async function resolveDocumentSets(
       return {
         schema:
           needSchema && doc.schema
-            ? await resolveSchema(doc.schema, config)
+            ? await resolveSchema(doc.schema, config, sourceOverride)
             : undefined,
         endpoint: referredSchema ? referredSchema.endpoint : undefined,
         engineKey: referredSchema ? referredSchema.engineKey : undefined,

@@ -16,6 +16,7 @@ import { LoadingHandler } from "./server";
 export class GraphQLWorkspace {
   private _onDiagnostics?: NotificationHandler<PublishDiagnosticsParams>;
   private _onDecorations?: (any: any) => void;
+  private _onSchemaTags?: (tags: string[]) => void;
   public projectsByFolderUri: Map<string, GraphQLProject[]> = new Map();
 
   constructor(private loadingHandler: LoadingHandler) {}
@@ -26,6 +27,10 @@ export class GraphQLWorkspace {
 
   onDecorations(handler: (any: any) => void) {
     this._onDecorations = handler;
+  }
+
+  onSchemaTags(handler: (tags: string[]) => void): void {
+    this._onSchemaTags = handler;
   }
 
   addProjectsInFolder(folder: WorkspaceFolder) {
@@ -69,6 +74,10 @@ export class GraphQLWorkspace {
         projectConfig.configFile,
         this.loadingHandler
       );
+
+      project.onSchemaTags((tags: string[]) => {
+        this._onSchemaTags && this._onSchemaTags(tags);
+      });
 
       project.onDiagnostics(params => {
         this._onDiagnostics && this._onDiagnostics(params);

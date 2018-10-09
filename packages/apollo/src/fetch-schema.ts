@@ -152,5 +152,9 @@ export async function fetchSchemaFromEngine(
     throw new Error("Unable to get schema from Apollo Engine");
   }
 
-  return buildIntrospectionSchemaFromSDL(engineSchema.data.service.schema);
+  // const introspection = buildIntrospectionSchemaFromSDL(
+  //   new Source(engineSchema.data.service.schema.__schema)
+  // );
+
+  return engineSchema.data.service.schema.__schema;
 }

@@ -20,6 +20,14 @@ export default class ApolloStatusBar {
     this.statusBarItem.show();
   }
 
+  public setTagsPopulated(is: boolean) {
+    if (is) {
+      this.statusBarItem.command = "launchSchemaTagPicker";
+    } else {
+      this.statusBarItem.command = undefined;
+    }
+  }
+
   public dispose() {
     this.statusBarItem.dispose();
   }
