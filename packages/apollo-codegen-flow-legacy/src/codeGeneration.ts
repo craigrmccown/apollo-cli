@@ -11,11 +11,11 @@ import {
   GraphQLUnionType
 } from "graphql";
 
-import { wrap } from "apollo-codegen-core/lib/utilities/printing";
+import { wrap } from "@craigrmccown/apollo-codegen-core/lib/utilities/printing";
 
-import { sortEnumValues } from "apollo-codegen-core/lib/utilities/graphql";
+import { sortEnumValues } from "@craigrmccown/apollo-codegen-core/lib/utilities/graphql";
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 
 import {
   typeDeclaration,
@@ -30,7 +30,7 @@ import {
   LegacyOperation,
   LegacyFragment,
   LegacyField
-} from "apollo-codegen-core/lib/compiler/legacyIR";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 import { GraphQLType } from "graphql";
 import { GraphQLAbstractType } from "graphql";
 

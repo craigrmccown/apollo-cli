@@ -36,8 +36,8 @@ import {
   resolveDocumentSets,
   ResolvedDocumentSet,
   DocumentSet
-} from "apollo/lib/config";
-import { engineLink, getIdFromKey } from "apollo/lib/engine";
+} from "@craigrmccown/apollo/lib/config";
+import { engineLink, getIdFromKey } from "@craigrmccown/apollo/lib/engine";
 
 import { toPromise, execute } from "apollo-link";
 

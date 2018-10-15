@@ -1,11 +1,14 @@
 import { parse } from "graphql";
 
-import { loadSchema } from "apollo-codegen-core/lib/loading";
+import { loadSchema } from "@craigrmccown/apollo-codegen-core/lib/loading";
 const schema = loadSchema(
   require.resolve("../../../common-test/fixtures/starwars/schema.json")
 );
 
-import { compileToIR, CompilerContext } from "apollo-codegen-core/lib/compiler";
+import {
+  compileToIR,
+  CompilerContext
+} from "@craigrmccown/apollo-codegen-core/lib/compiler";
 
 import { generateSource } from "../codeGeneration";
 import { FlowCompilerOptions } from "../language";

@@ -1,5 +1,5 @@
 {
-  "name": "apollo-codegen-core",
+  "name": "@craigrmccown/apollo-codegen-core",
   "description": "Core generator APIs for Apollo Codegen",
   "version": "0.28.1",
   "author": "Apollo GraphQL <opensource@apollographql.com>",

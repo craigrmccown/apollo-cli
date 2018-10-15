@@ -14,14 +14,14 @@ import {
   typeDeclarationForGraphQLType
 } from "../codeGeneration";
 
-import { loadSchema } from "apollo-codegen-core/lib/loading";
+import { loadSchema } from "@craigrmccown/apollo-codegen-core/lib/loading";
 const schema = loadSchema(
   require.resolve("../../../common-test/fixtures/starwars/schema.json")
 );
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 
-import { compileToLegacyIR } from "apollo-codegen-core/lib/compiler/legacyIR";
+import { compileToLegacyIR } from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 
 describe("Scala code generation", function() {
   let generator;

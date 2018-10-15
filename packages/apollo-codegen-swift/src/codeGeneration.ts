@@ -17,9 +17,12 @@ import {
   Fragment,
   SelectionSet,
   Field
-} from "apollo-codegen-core/lib/compiler";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler";
 
-import { join, wrap } from "apollo-codegen-core/lib/utilities/printing";
+import {
+  join,
+  wrap
+} from "@craigrmccown/apollo-codegen-core/lib/utilities/printing";
 
 import {
   SwiftGenerator,
@@ -28,18 +31,18 @@ import {
   Struct
 } from "./language";
 import { Helpers } from "./helpers";
-import { isList } from "apollo-codegen-core/lib/utilities/graphql";
+import { isList } from "@craigrmccown/apollo-codegen-core/lib/utilities/graphql";
 
 import {
   typeCaseForSelectionSet,
   TypeCase,
   Variant
-} from "apollo-codegen-core/lib/compiler/visitors/typeCase";
-import { collectFragmentsReferenced } from "apollo-codegen-core/lib/compiler/visitors/collectFragmentsReferenced";
-import { generateOperationId } from "apollo-codegen-core/lib/compiler/visitors/generateOperationId";
-import { collectAndMergeFields } from "apollo-codegen-core/lib/compiler/visitors/collectAndMergeFields";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/typeCase";
+import { collectFragmentsReferenced } from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/collectFragmentsReferenced";
+import { generateOperationId } from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/generateOperationId";
+import { collectAndMergeFields } from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/collectAndMergeFields";
 
-import "apollo-codegen-core/lib/utilities/array";
+import "@craigrmccown/apollo-codegen-core/lib/utilities/array";
 
 export interface Options {
   namespace?: string;

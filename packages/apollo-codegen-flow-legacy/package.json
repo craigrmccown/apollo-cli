@@ -1,5 +1,5 @@
 {
-  "name": "apollo-codegen-flow-legacy",
+  "name": "@craigrmccown/apollo-codegen-flow-legacy",
   "description": "Legacy Flow generator module for Apollo Codegen",
   "version": "0.28.1",
   "author": "Apollo GraphQL <opensource@apollographql.com>",
@@ -23,7 +23,7 @@
     "npm": ">=6"
   },
   "dependencies": {
-    "apollo-codegen-core": "file:../apollo-codegen-core"
+    "@craigrmccown/apollo-codegen-core": "file:../apollo-codegen-core"
   },
   "jest": {
     "testEnvironment": "node",

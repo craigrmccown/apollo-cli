@@ -3,7 +3,7 @@ import * as path from "path";
 import {
   loadSchema,
   loadAndMergeQueryDocuments
-} from "apollo-codegen-core/lib/loading";
+} from "@craigrmccown/apollo-codegen-core/lib/loading";
 
 import { validateQueryDocument } from "../validation";
 

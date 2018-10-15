@@ -1,5 +1,5 @@
-import { extractDocumentFromJavascript } from "apollo-codegen-core/lib/loading";
-import { fs } from "apollo-codegen-core/lib/localfs";
+import { extractDocumentFromJavascript } from "@craigrmccown/apollo-codegen-core/lib/loading";
+import { fs } from "@craigrmccown/apollo-codegen-core/lib/localfs";
 import { execute, toPromise } from "apollo-link";
 import { createHttpLink, HttpLink } from "apollo-link-http";
 import {

@@ -1,7 +1,7 @@
 import { camelCase, pascalCase } from "change-case";
 import * as Inflector from "inflected";
 
-import { join } from "apollo-codegen-core/lib/utilities/printing";
+import { join } from "@craigrmccown/apollo-codegen-core/lib/utilities/printing";
 
 import { escapeIdentifierIfNeeded, Property } from "./language";
 
@@ -17,7 +17,7 @@ import {
   LegacyCompilerContext,
   LegacyField,
   LegacyInlineFragment
-} from "apollo-codegen-core/lib/compiler/legacyIR";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 import { GraphQLInputField } from "graphql";
 
 export function enumCaseName(name: string) {

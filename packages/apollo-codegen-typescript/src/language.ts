@@ -1,10 +1,10 @@
 import { GraphQLEnumType, GraphQLInputObjectType, GraphQLType } from "graphql";
 
-import { CompilerOptions } from "apollo-codegen-core/lib/compiler";
+import { CompilerOptions } from "@craigrmccown/apollo-codegen-core/lib/compiler";
 
-import { commentBlockContent } from "apollo-codegen-core/lib/utilities/printing";
+import { commentBlockContent } from "@craigrmccown/apollo-codegen-core/lib/utilities/printing";
 
-import { sortEnumValues } from "apollo-codegen-core/lib/utilities/graphql";
+import { sortEnumValues } from "@craigrmccown/apollo-codegen-core/lib/utilities/graphql";
 
 import { createTypeFromGraphQLTypeFunction } from "./helpers";
 

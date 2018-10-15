@@ -22,7 +22,7 @@ import Uri from "vscode-uri";
 import * as ws from "ws";
 
 import { dirname } from "path";
-import { findAndLoadConfig } from "apollo/lib/config";
+import { findAndLoadConfig } from "@craigrmccown/apollo/lib/config";
 
 const connection = createConnection(ProposedFeatures.all);
 

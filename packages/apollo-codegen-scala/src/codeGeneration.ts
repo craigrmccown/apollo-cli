@@ -7,9 +7,9 @@ import {
   GraphQLInputObjectType
 } from "graphql";
 
-import { isTypeProperSuperTypeOf } from "apollo-codegen-core/lib/utilities/graphql";
+import { isTypeProperSuperTypeOf } from "@craigrmccown/apollo-codegen-core/lib/utilities/graphql";
 
-import { join } from "apollo-codegen-core/lib/utilities/printing";
+import { join } from "@craigrmccown/apollo-codegen-core/lib/utilities/printing";
 
 import {
   packageDeclaration,
@@ -33,14 +33,14 @@ import { multilineString } from "./values";
 
 import { possibleTypesForType, typeNameFromGraphQLType } from "./types";
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 import {
   LegacyCompilerContext,
   LegacyOperation,
   LegacyFragment,
   LegacyField,
   LegacyInlineFragment
-} from "apollo-codegen-core/lib/compiler/legacyIR";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 import { GraphQLType } from "graphql";
 import { Property } from "./language";
 import { GraphQLCompositeType } from "graphql";

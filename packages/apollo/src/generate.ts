@@ -1,29 +1,29 @@
-import { fs } from "apollo-codegen-core/lib/localfs";
+import { fs } from "@craigrmccown/apollo-codegen-core/lib/localfs";
 import * as path from "path";
 
-import { loadAndMergeQueryDocuments } from "apollo-codegen-core/lib/loading";
+import { loadAndMergeQueryDocuments } from "@craigrmccown/apollo-codegen-core/lib/loading";
 import { validateQueryDocument } from "./validation";
 import {
   compileToIR,
   CompilerContext,
   CompilerOptions
-} from "apollo-codegen-core/lib/compiler";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler";
 import {
   compileToLegacyIR,
   CompilerOptions as LegacyCompilerOptions
-} from "apollo-codegen-core/lib/compiler/legacyIR";
-import serializeToJSON from "apollo-codegen-core/lib/serializeToJSON";
-import { BasicGeneratedFile } from "apollo-codegen-core/lib/utilities/CodeGenerator";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
+import serializeToJSON from "@craigrmccown/apollo-codegen-core/lib/serializeToJSON";
+import { BasicGeneratedFile } from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 
-import { generateSource as generateSwiftSource } from "apollo-codegen-swift";
-import { generateSource as generateTypescriptLegacySource } from "apollo-codegen-typescript-legacy";
-import { generateSource as generateFlowLegacySource } from "apollo-codegen-flow-legacy";
-import { generateSource as generateFlowSource } from "apollo-codegen-flow";
+import { generateSource as generateSwiftSource } from "@craigrmccown/apollo-codegen-swift";
+import { generateSource as generateTypescriptLegacySource } from "@craigrmccown/apollo-codegen-typescript-legacy";
+import { generateSource as generateFlowLegacySource } from "@craigrmccown/apollo-codegen-flow-legacy";
+import { generateSource as generateFlowSource } from "@craigrmccown/apollo-codegen-flow";
 import {
   generateLocalSource as generateTypescriptLocalSource,
   generateGlobalSource as generateTypescriptGlobalSource
-} from "apollo-codegen-typescript";
-import { generateSource as generateScalaSource } from "apollo-codegen-scala";
+} from "@craigrmccown/apollo-codegen-typescript";
+import { generateSource as generateScalaSource } from "@craigrmccown/apollo-codegen-scala";
 import { GraphQLSchema } from "graphql";
 import { FlowCompilerOptions } from "../../apollo-codegen-flow/lib/language";
 

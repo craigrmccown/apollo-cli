@@ -1,4 +1,4 @@
-jest.mock("apollo-codegen-core/lib/localfs", () => {
+jest.mock("@craigrmccown/apollo-codegen-core/lib/localfs", () => {
   return require("../../../__mocks__/localfs");
 });
 
@@ -9,7 +9,10 @@ import { print, parse } from "graphql";
 import { ENGINE_URI } from "../../../engine";
 import { VALIDATE_OPERATIONS } from "../../../operations/validateOperations";
 
-import { fs as mockFS, vol } from "apollo-codegen-core/lib/localfs";
+import {
+  fs as mockFS,
+  vol
+} from "@craigrmccown/apollo-codegen-core/lib/localfs";
 const test = setup.do(() => mockConsole());
 const ENGINE_API_KEY = "service:test:1234";
 const hash = "12345";

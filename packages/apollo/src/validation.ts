@@ -15,7 +15,10 @@ import {
   visitInParallel
 } from "graphql";
 
-import { ToolError, logError } from "apollo-codegen-core/lib/errors";
+import {
+  ToolError,
+  logError
+} from "@craigrmccown/apollo-codegen-core/lib/errors";
 
 export function getValidationErrors(
   schema: GraphQLSchema,

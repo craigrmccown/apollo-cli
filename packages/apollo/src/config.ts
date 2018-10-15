@@ -1,11 +1,14 @@
 import { basename, dirname, join, relative, resolve } from "path";
-import { fs, withGlobalFS } from "apollo-codegen-core/lib/localfs";
+import {
+  fs,
+  withGlobalFS
+} from "@craigrmccown/apollo-codegen-core/lib/localfs";
 
 import * as fg from "glob";
 import * as minimatch from "minimatch";
 import { GraphQLSchema, extendSchema, visit, buildASTSchema } from "graphql";
 import { loadSchema } from "./load-schema";
-import { loadQueryDocuments } from "apollo-codegen-core/lib/loading";
+import { loadQueryDocuments } from "@craigrmccown/apollo-codegen-core/lib/loading";
 
 export interface EndpointConfig {
   url?: string; // main HTTP endpoint

@@ -6,7 +6,7 @@ import {
   GraphQLList
 } from "graphql";
 
-import { loadSchema } from "apollo-codegen-core/lib/loading";
+import { loadSchema } from "@craigrmccown/apollo-codegen-core/lib/loading";
 const schema = loadSchema(
   require.resolve("../../../common-test/fixtures/starwars/schema.json")
 );
@@ -18,7 +18,7 @@ import {
   SelectionSet,
   Field,
   Argument
-} from "apollo-codegen-core/lib/compiler";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler";
 
 import { SwiftAPIGenerator } from "../codeGeneration";
 

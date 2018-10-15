@@ -8,16 +8,16 @@ import {
   Fragment,
   SelectionSet,
   Field
-} from "apollo-codegen-core/lib/compiler";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler";
 
 import {
   typeCaseForSelectionSet,
   Variant
-} from "apollo-codegen-core/lib/compiler/visitors/typeCase";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/typeCase";
 
-import { collectAndMergeFields } from "apollo-codegen-core/lib/compiler/visitors/collectAndMergeFields";
+import { collectAndMergeFields } from "@craigrmccown/apollo-codegen-core/lib/compiler/visitors/collectAndMergeFields";
 
-import { BasicGeneratedFile } from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import { BasicGeneratedFile } from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 import FlowGenerator, { ObjectProperty, FlowCompilerOptions } from "./language";
 import Printer from "./printer";
 

@@ -1,11 +1,11 @@
 import { propertyDeclarations } from "./codeGeneration";
 import { typeNameFromGraphQLType } from "./types";
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 import {
   LegacyCompilerContext,
   LegacyInlineFragment
-} from "apollo-codegen-core/lib/compiler/legacyIR";
+} from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 import { GraphQLType } from "graphql";
 
 export interface Property {

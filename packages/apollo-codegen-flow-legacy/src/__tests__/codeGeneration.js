@@ -2,7 +2,7 @@ import { parse } from "graphql";
 
 import { generateSource } from "../codeGeneration";
 
-import { loadSchema } from "apollo-codegen-core/lib/loading";
+import { loadSchema } from "@craigrmccown/apollo-codegen-core/lib/loading";
 const starWarsSchema = loadSchema(
   require.resolve("../../../common-test/fixtures/starwars/schema.json")
 );
@@ -10,9 +10,9 @@ const miscSchema = loadSchema(
   require.resolve("../../../common-test/fixtures/misc/schema.json")
 );
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 
-import { compileToLegacyIR } from "apollo-codegen-core/lib/compiler/legacyIR";
+import { compileToLegacyIR } from "@craigrmccown/apollo-codegen-core/lib/compiler/legacyIR";
 
 function setup(schema) {
   const context = {

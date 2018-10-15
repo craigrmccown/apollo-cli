@@ -1,4 +1,4 @@
-jest.mock("apollo-codegen-core/lib/localfs", () => {
+jest.mock("@craigrmccown/apollo-codegen-core/lib/localfs", () => {
   return require("../../../__mocks__/localfs");
 });
 
@@ -9,7 +9,10 @@ import * as fs from "fs";
 import { test as setup } from "apollo-cli-test";
 import { introspectionQuery, print, execute, buildSchema } from "graphql";
 import gql from "graphql-tag";
-import { fs as mockFS, vol } from "apollo-codegen-core/lib/localfs";
+import {
+  fs as mockFS,
+  vol
+} from "@craigrmccown/apollo-codegen-core/lib/localfs";
 
 const test = setup.do(() => mockConsole());
 

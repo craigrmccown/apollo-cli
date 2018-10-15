@@ -1,6 +1,6 @@
 import { stripIndent } from "common-tags";
 
-import CodeGenerator from "apollo-codegen-core/lib/utilities/CodeGenerator";
+import CodeGenerator from "@craigrmccown/apollo-codegen-core/lib/utilities/CodeGenerator";
 
 import {
   objectDeclaration,
