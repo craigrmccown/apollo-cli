@@ -1,7 +1,7 @@
 {
   "name": "@craigrmccown/apollo-codegen-typescript-legacy",
   "description": "Legacy TypeScript generator module for Apollo Codegen",
-  "version": "0.28.1",
+  "version": "0.28.2",
   "author": "Apollo GraphQL <opensource@apollographql.com>",
   "license": "MIT",
   "repository": {
@@ -24,6 +24,9 @@
   },
   "dependencies": {
     "@craigrmccown/apollo-codegen-core": "file:../apollo-codegen-core"
+  },
+  "peerDependencies": {
+    "graphql": "^14.0.2"
   },
   "jest": {
     "testEnvironment": "node",
