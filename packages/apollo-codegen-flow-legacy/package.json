@@ -1,7 +1,7 @@
 {
   "name": "@craigrmccown/apollo-codegen-flow-legacy",
   "description": "Legacy Flow generator module for Apollo Codegen",
-  "version": "0.28.2",
+  "version": "0.28.3",
   "author": "Apollo GraphQL <opensource@apollographql.com>",
   "license": "MIT",
   "repository": {
