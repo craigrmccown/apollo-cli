@@ -5,44 +5,40 @@
 Apollo CLI brings together your GraphQL clients and servers with tools for validating your schema, linting your operations for compatibility with your server, and generating static types for improved client-side type safety.
 
 <!-- toc -->
-
-- [Apollo CLI](#apollo-cli)
-- [Usage](#usage)
-- [Commands](#commands)
-- [Configuration](#configuration)
-- [Code Generation](#code-generation)
-- [Contributing](#contributing)
-  <!-- tocstop -->
+* [Apollo CLI](#apollo-cli)
+* [Usage](#usage)
+* [Commands](#commands)
+* [Configuration](#configuration)
+* [Code Generation](#code-generation)
+* [Contributing](#contributing)
+<!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g @craigrmccown/apollo
 $ apollo COMMAND
 running command...
 $ apollo (-v|--version|version)
-@craigrmccown/apollo/1.9.4 darwin-x64 node-v9.11.2
+@craigrmccown/apollo/1.9.5 darwin-x64 node-v9.11.2
 $ apollo --help [COMMAND]
 USAGE
   $ apollo COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`apollo codegen:generate [OUTPUT]`](#apollo-codegengenerate-output)
-- [`apollo help [COMMAND]`](#apollo-help-command)
-- [`apollo queries:check`](#apollo-queriescheck)
-- [`apollo queries:extract OUTPUT`](#apollo-queriesextract-output)
-- [`apollo schema:check`](#apollo-schemacheck)
-- [`apollo schema:download OUTPUT`](#apollo-schemadownload-output)
-- [`apollo schema:publish`](#apollo-schemapublish)
+* [`apollo codegen:generate [OUTPUT]`](#apollo-codegengenerate-output)
+* [`apollo help [COMMAND]`](#apollo-help-command)
+* [`apollo queries:check`](#apollo-queriescheck)
+* [`apollo queries:extract OUTPUT`](#apollo-queriesextract-output)
+* [`apollo schema:check`](#apollo-schemacheck)
+* [`apollo schema:download OUTPUT`](#apollo-schemadownload-output)
+* [`apollo schema:publish`](#apollo-schemapublish)
 
 ## `apollo codegen:generate [OUTPUT]`
 
@@ -56,11 +52,11 @@ ARGUMENTS
   OUTPUT
       Directory to which generated files will be written.
       - For TypeScript/Flow generators, this specifies a directory relative to each source file by default.
-      - For TypeScript/Flow generators with the "outputFlat" flag is set, and for the Swift generator, this specifies a
+      - For TypeScript/Flow generators with the "outputFlat" flag is set, and for the Swift generator, this specifies a 
       file or directory (absolute or relative to the current working directory) to which:
          - a file will be written for each query (if "output" is a directory)
          - all generated types will be written
-      - For all other types, this defines a file (absolute or relative to the current working directory) to which all
+      - For all other types, this defines a file (absolute or relative to the current working directory) to which all 
       generated types are written.
 
 OPTIONS
@@ -237,7 +233,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/schema/publish.ts](https://github.com/apollographql/apollo-cli/blob/master/packages/apollo/src/commands/schema/publish.ts)_
-
 <!-- commandsstop -->
 
 # Configuration
